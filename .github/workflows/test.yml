@@ -1,4 +1,3 @@
-yaml
 name: Python Test
 
 on:
@@ -9,13 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: GitHubのコードを取得
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Pythonをセットアップ
+      - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: "3.12"
 
-      - name: Pythonを実行
-        run: python main.py
+      - name: Run Python
+        run: python main916.py
