@@ -1,10 +1,10 @@
 from datetime import datetime
 
 print("================================")
-print("GitHub Actions テスト")
+print("GitHub Actions Test")
 print("================================")
 
 now = datetime.now()
 
-print("実行時刻:", now)
-print("自動実行に成功しました！")
+print("Execution time:", now)
+print("Automatic execution succeeded!")
