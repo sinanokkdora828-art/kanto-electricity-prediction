@@ -194,3 +194,16 @@ print("関東7都県の予報気温")
 print("==========================================")
 
 print(df_forecast.to_string(index=False))
+
+
+# ==========================================
+# ⑬ CSVファイルに保存
+# ==========================================
+
+df_forecast.to_csv(
+    "forecast.csv",
+    index=False,
+    encoding="utf-8-sig"
+)
+
+print("\nCSVファイルを保存しました")
