@@ -36,3 +36,13 @@ jobs:
       - name: Run Python
         run: |
           python main.py
+      # ⑤ Pythonを実行
+      - name: Run Python
+        run: python main.py
+
+      # ⑥ グラフ画像を保存
+      - name: Upload graph
+        uses: actions/upload-artifact@v4
+        with:
+          name: temperature-demand-graph
+          path: results/temperature_demand_quadratic.png
