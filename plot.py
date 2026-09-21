@@ -1,8 +1,34 @@
 import os
+import matplotlib
+
+# 画面表示なしで画像を作成
+matplotlib.use("Agg")
+
 import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
 import numpy as np
 from sklearn.linear_model import LinearRegression
 
+
+# ==========================================
+# 日本語フォント設定
+# ==========================================
+
+font_path = "/usr/share/fonts/opentype/noto/NotoSansCJK-Regular.ttc"
+
+if os.path.exists(font_path):
+
+    fm.fontManager.addfont(font_path)
+
+    font_prop = fm.FontProperties(fname=font_path)
+    font_name = font_prop.get_name()
+
+    plt.rcParams["font.family"] = font_name
+    plt.rcParams["axes.unicode_minus"] = False
+
+else:
+
+    print("日本語フォントが見つかりません")
 
 def create_plot(df_model):
 
