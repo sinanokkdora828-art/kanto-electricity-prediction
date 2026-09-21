@@ -6,6 +6,7 @@ from model import train_model
 from plot import create_plot
 from prediction import predict_electricity_demand
 
+
 def main():
 
     print("==========================================")
@@ -29,11 +30,10 @@ def main():
 
     print("学習データ件数:", len(df_model))
 
+    # ==========================================
+    # 将来の電力需要予測
+    # ==========================================
 
-if __name__ == "__main__":
-    main()
-
-    # JSONから取得した予測気温データ
     df_forecast = pd.DataFrame({
 
         "都道府県": [
@@ -68,8 +68,12 @@ if __name__ == "__main__":
 
     })
 
-    # 電力需要を予測
+    # 予測処理
     df_prediction = predict_electricity_demand(
         model,
         df_forecast
     )
+
+
+if __name__ == "__main__":
+    main()
