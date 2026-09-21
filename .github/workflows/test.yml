@@ -23,4 +23,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run Python
-        run: python main916.py
+        run: python src/weather_forecast.py
