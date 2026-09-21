@@ -1,9 +1,10 @@
+import pandas as pd
+
 from historical_weather import load_historical_weather
 from electricity import load_electricity_demand
 from model import train_model
 from plot import create_plot
 from prediction import predict_electricity_demand
-
 
 def main():
 
