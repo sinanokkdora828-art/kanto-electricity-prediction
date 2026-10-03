@@ -1,7 +1,7 @@
 import pandas as pd
 
-import shutil
 import os
+import shutil
 
 from historical_weather import load_historical_weather
 from electricity import load_electricity_demand
