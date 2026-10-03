@@ -1,7 +1,6 @@
-import pandas as pd
-
 import os
 import shutil
+import pandas as pd
 
 from historical_weather import load_historical_weather
 from electricity import load_electricity_demand
@@ -17,10 +16,6 @@ from prediction import (
 
 from map_plot import create_prediction_map
 
-
-# ==========================================
-# メイン処理
-# ==========================================
 
 def main():
 
@@ -73,9 +68,7 @@ def main():
     print("\n【STEP 4】")
     print("学習結果のグラフを作成します")
 
-    create_plot(
-        df_model
-    )
+    create_plot(df_model)
 
 
     # ==========================================
@@ -92,16 +85,13 @@ def main():
     print("\nJMAから取得した予報データ")
 
     print(
-        df_forecast_raw.to_string(
-            index=False
-        )
+        df_forecast_raw.to_string(index=False)
     )
 
 
     # ==========================================
     # STEP 6
     # 予報期間の平均気温を計算
-    # ＋人口を追加
     # ==========================================
 
     print("\n【STEP 6】")
@@ -114,7 +104,7 @@ def main():
 
     # ==========================================
     # STEP 7
-    # 機械学習モデルで電力需要を予測
+    # 将来の電力需要を予測
     # ==========================================
 
     print("\n【STEP 7】")
@@ -128,7 +118,7 @@ def main():
 
     # ==========================================
     # STEP 8
-    # 予測結果を地図画像にする
+    # 電力需要予測マップを作成
     # ==========================================
 
     print("\n【STEP 8】")
@@ -138,25 +128,62 @@ def main():
         df_prediction
     )
 
-    # GitHub Pages用に予測画像をコピー
-os.makedirs("docs/results", exist_ok=True)
-
-shutil.copy(
-    "results/kanto_electricity_prediction.png",
-    "docs/results/kanto_electricity_prediction.png"
-)
-
-print("GitHub Pages用の画像を更新しました")
-
 
     # ==========================================
     # STEP 9
-    # 最終結果を表示
+    # GitHub Pages用に画像をコピー
+    # ==========================================
+
+    print("\n【STEP 9】")
+    print("GitHub Pages用の画像を準備します")
+
+    # docs/results フォルダを作成
+    os.makedirs(
+        "docs/results",
+        exist_ok=True
+    )
+
+
+    # 予測マップをGitHub Pages用フォルダへコピー
+    shutil.copy(
+        "results/kanto_electricity_prediction.png",
+        "docs/results/kanto_electricity_prediction.png"
+    )
+
+
+    print(
+        "GitHub Pages用の画像をコピーしました"
+    )
+
+
+    # ==========================================
+    # STEP 10
+    # 予測結果CSVを保存
+    # ==========================================
+
+    print("\n【STEP 10】")
+    print("予測結果をCSVとして保存します")
+
+    df_prediction.to_csv(
+        "prediction.csv",
+        index=False,
+        encoding="utf-8-sig"
+    )
+
+
+    print(
+        "予測結果を prediction.csv に保存しました"
+    )
+
+
+    # ==========================================
+    # 最終結果
     # ==========================================
 
     print("\n==========================================")
     print("最終予測結果")
     print("==========================================")
+
 
     print(
         df_prediction[
@@ -167,31 +194,39 @@ print("GitHub Pages用の画像を更新しました")
                 "予測電力需要_Wh",
                 "予測電力需要_兆Wh"
             ]
-        ].to_string(
-            index=False
-        )
+        ].to_string(index=False)
     )
 
 
     # ==========================================
-    # STEP 10
-    # 予測結果をCSVに保存
+    # 生成されたファイルを表示
     # ==========================================
 
-    df_prediction.to_csv(
-        "prediction.csv",
-        index=False,
-        encoding="utf-8-sig"
+    print("\n==========================================")
+    print("生成されたファイル")
+    print("==========================================")
+
+
+    print(
+        "予測結果CSV："
+        "prediction.csv"
     )
 
     print(
-        "\n予測結果を prediction.csv に保存しました"
+        "予測グラフ："
+        "results/temperature_demand_quadratic.png"
     )
 
+    print(
+        "予測マップ："
+        "results/kanto_electricity_prediction.png"
+    )
 
-    # ==========================================
-    # 完了
-    # ==========================================
+    print(
+        "GitHub Pages用画像："
+        "docs/results/kanto_electricity_prediction.png"
+    )
+
 
     print("\n==========================================")
     print("すべての処理が完了しました")
