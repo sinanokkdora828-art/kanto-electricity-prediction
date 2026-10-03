@@ -1,1 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
 
+<head>
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>関東地方 電力需要予測</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            font-family:
+                Arial,
+                "Noto Sans JP",
+                sans-serif;
+
+            background-color: #f5f5f5;
+
+            color: #333;
+        }
+
+        header {
+            background-color: #ffffff;
+
+            padding: 25px;
+
+            text-align: center;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        h1 {
+            margin: 0;
+
+            font-size: 28px;
+        }
+
+        .subtitle {
+            margin-top: 10px;
+
+            color: #666;
+        }
+
+        main {
+            max-width: 1200px;
+
+            margin: 30px auto;
+
+            padding: 0 20px;
+        }
+
+        .card {
+            background-color: white;
+
+            padding: 25px;
+
+            margin-bottom: 25px;
+
+            border-radius: 12px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .card h2 {
+            margin-top: 0;
+        }
+
+        .prediction-image {
+            width: 100%;
+
+            height: auto;
+
+            display: block;
+
+            border-radius: 8px;
+        }
+
+        .update {
+            text-align: right;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+        footer {
+            text-align: center;
+
+            padding: 30px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<header>
+
+    <h1>⚡ 関東地方 電力需要予測</h1>
+
+    <div class="subtitle">
+        気象庁の予報気温と過去の電力需要データを利用した予測
+    </div>
+
+</header>
+
+
+<main>
+
+    <div class="card">
+
+        <h2>電力需要予測マップ</h2>
+
+        <img
+            class="prediction-image"
+            src="../results/kanto_electricity_prediction.png"
+            alt="関東地方の電力需要予測マップ"
+        >
+
+        <p class="update">
+            ※ GitHub Actionsによって自動更新されます
+        </p>
+
+    </div>
+
+
+    <div class="card">
+
+        <h2>システムについて</h2>
+
+        <p>
+            気象庁から取得した最新の予報気温をもとに、
+            機械学習モデルによって関東地方7都県の
+            電力需要を予測しています。
+        </p>
+
+        <p>
+            予測対象：
+            茨城県・栃木県・群馬県・埼玉県・千葉県・東京都・神奈川県
+        </p>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    関東電力需要予測システム
+
+</footer>
+
+
+</body>
+
+</html>
