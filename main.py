@@ -1,3 +1,6 @@
+import shutil
+import os
+
 import pandas as pd
 
 from historical_weather import load_historical_weather
@@ -134,6 +137,16 @@ def main():
     create_prediction_map(
         df_prediction
     )
+
+    # GitHub Pages用に予測画像をコピー
+os.makedirs("docs/results", exist_ok=True)
+
+shutil.copy(
+    "results/kanto_electricity_prediction.png",
+    "docs/results/kanto_electricity_prediction.png"
+)
+
+print("GitHub Pages用の画像を更新しました")
 
 
     # ==========================================
