@@ -11,7 +11,7 @@ from prediction import (
     calculate_forecast_average,
     predict_electricity_demand
 )
-
+from map_plot import create_prediction_map
 
 # ==========================================
 # メイン処理
