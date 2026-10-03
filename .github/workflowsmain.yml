@@ -8,30 +8,38 @@ on:
     - cron: "0 */6 * * *"
 
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+
 jobs:
 
   predict:
 
     runs-on: ubuntu-latest
 
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
 
     steps:
 
       # ==========================================
-      # ① GitHubリポジトリを取得
+      # ① リポジトリ取得
       # ==========================================
 
       - name: リポジトリを取得
-
         uses: actions/checkout@v4
 
 
       # ==========================================
-      # ② Pythonをセットアップ
+      # ② Python
       # ==========================================
 
       - name: Pythonをセットアップ
-
         uses: actions/setup-python@v5
 
         with:
@@ -39,11 +47,10 @@ jobs:
 
 
       # ==========================================
-      # ③ 日本語フォントをインストール
+      # ③ 日本語フォント
       # ==========================================
 
       - name: 日本語フォントをインストール
-
         run: |
 
           sudo apt-get update
@@ -52,11 +59,10 @@ jobs:
 
 
       # ==========================================
-      # ④ Pythonライブラリをインストール
+      # ④ Pythonライブラリ
       # ==========================================
 
       - name: Pythonライブラリをインストール
-
         run: |
 
           python -m pip install --upgrade pip
@@ -65,62 +71,56 @@ jobs:
 
 
       # ==========================================
-      # ⑤ 電力需要予測を実行
+      # ⑤ 電力需要予測
       # ==========================================
 
       - name: 電力需要予測を実行
-
         run: |
 
           python main.py
 
 
       # ==========================================
-      # ⑥ GitHub Pages用ファイルを確認
+      # ⑥ 生成されたファイル確認
       # ==========================================
 
-      - name: Pages用ファイルを確認
-
+      - name: ファイルを確認
         run: |
 
-          echo "=========================================="
-
-          echo "docsフォルダ"
-
-          echo "=========================================="
+          echo "===== docs ====="
 
           find docs -maxdepth 3 -type f -print
 
           echo ""
 
-          echo "=========================================="
-
-          echo "resultsフォルダ"
-
-          echo "=========================================="
+          echo "===== results ====="
 
           find results -maxdepth 2 -type f -print
 
 
       # ==========================================
-      # ⑦ GitHub Pagesへ渡すファイルを保存
+      # ⑦ GitHub Pages設定
       # ==========================================
 
-      - name: GitHub Pages用ファイルをアップロード
+      - name: GitHub Pagesを設定
+        uses: actions/configure-pages@v5
 
+
+      # ==========================================
+      # ⑧ docsをPages用Artifactにする
+      # ==========================================
+
+      - name: Pages用ファイルをアップロード
         uses: actions/upload-pages-artifact@v3
 
         with:
-
           path: ./docs
 
 
       # ==========================================
-      # ⑧ GitHub Pagesへ公開
+      # ⑨ GitHub Pagesへ公開
       # ==========================================
 
       - name: GitHub Pagesへデプロイ
-
         id: deployment
-
         uses: actions/deploy-pages@v4
